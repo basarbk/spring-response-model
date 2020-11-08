@@ -22,6 +22,7 @@ public class ResponseModel {
 		return args -> IntStream.rangeClosed(1, 30).forEach(i -> {
 			User user = new User();
 			user.setUsername("user" + i);
+			user.setLastname("lastname" + i);
 			user.setEmail("user" + i + "@mail.com");
 			user.setPassword("password");
 			userRepository.save(user);
