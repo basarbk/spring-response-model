@@ -13,7 +13,7 @@ public class UserController {
   UserService userService;
 
   @GetMapping("/api/1.0/users")
-  List<User> getUsers(){
+  List<UserProjection> getUsers(){
     return userService.getUsers();
   }
   
