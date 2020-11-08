@@ -1,7 +1,10 @@
 package com.bafoly.responsemodel;
 
+import java.util.Random;
 import java.util.stream.IntStream;
 
+import com.bafoly.responsemodel.article.Article;
+import com.bafoly.responsemodel.article.ArticleRepository;
 import com.bafoly.responsemodel.user.User;
 import com.bafoly.responsemodel.user.UserRepository;
 
@@ -18,7 +21,7 @@ public class ResponseModel {
 	}
 
 	@Bean
-	CommandLineRunner run(UserRepository userRepository){
+	CommandLineRunner run(UserRepository userRepository, ArticleRepository articleRepository){
 		return args -> IntStream.rangeClosed(1, 30).forEach(i -> {
 			User user = new User();
 			user.setUsername("user" + i);
@@ -26,6 +29,16 @@ public class ResponseModel {
 			user.setEmail("user" + i + "@mail.com");
 			user.setPassword("password");
 			userRepository.save(user);
+			Random random = new Random();
+			int count = random.nextInt(4);
+			
+			IntStream.rangeClosed(1, count).forEach(j -> {
+				Article article = new Article();
+				article.setOwner(user);
+				article.setTitle("title "+ j);
+				article.setContent("content "+j);
+				articleRepository.save(article);
+			});
 		});
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 
-  @Query(value = "Select * from user", nativeQuery = true)
+  @Query("Select u from User u")
   List<UserProjection> getAllUsers();
   
 }
